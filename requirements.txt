@@ -1,0 +1,17 @@
+# Testing framework
+pytest
+pytest-bdd
+pytest-rerunfailures
+
+# Reporting
+allure-pytest
+
+# Automation tools
+Appium-Python-Client
+selenium
+
+# Environment/config handling
+python-dotenv
+
+# Database
+psycopg2-binary
