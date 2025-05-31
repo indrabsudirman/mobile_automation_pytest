@@ -1,10 +1,9 @@
 from pytest_bdd import scenarios, given, when, then
 from pages.android.login_page import AndroidLoginPage
 
-# Gunakan path relatif terhadap bdd_features_base_dir
+# Use the relative path to the bdd_features_base_dir
 scenarios('android/login_android.feature')
 
-@pytest.mark.android
 @given("I am on the login page", target_fixture="login_page")
 def android_login_page(driver):
     return AndroidLoginPage(driver)
