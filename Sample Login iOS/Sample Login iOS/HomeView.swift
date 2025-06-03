@@ -15,16 +15,18 @@ struct HomeView: View {
             Text("Home")
                 .font(.largeTitle)
                 .bold()
+                .accessibilityLabel("Home")
                 .accessibilityIdentifier(AccessibilityIdentifier.Home.home)
 
             Text("Welcome, \(email)")
                 .font(.title2)
                 .padding(.top, 10)
+                .accessibilityLabel("Welcome, \(email)")
                 .accessibilityIdentifier(AccessibilityIdentifier.Home.message)
         }
         .padding()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("homeScreen")
+        .navigationBarBackButtonHidden(true)
     }
 }
-
-
