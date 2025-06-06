@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
@@ -48,7 +49,9 @@ fun LoginScreen(navController: NavController) {
             fontWeight = FontWeight.SemiBold,
             fontSize = 28.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.testTag("login.title")
+            modifier = Modifier
+                .testTag("login.title")
+                .semantics { contentDescription = "login.title" }
         )
 
         Spacer(modifier = Modifier.height(32.dp))
@@ -60,7 +63,8 @@ fun LoginScreen(navController: NavController) {
             singleLine = true,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag("login.email"),
+                .testTag("login.email")
+                .semantics { contentDescription = "login.email" },
             shape = RoundedCornerShape(12.dp),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
         )
@@ -74,7 +78,8 @@ fun LoginScreen(navController: NavController) {
             singleLine = true,
             modifier = Modifier
                 .fillMaxWidth()
-                .testTag("login.password"),
+                .testTag("login.password")
+                .semantics { contentDescription = "login.password" },
             shape = RoundedCornerShape(12.dp),
             visualTransformation = if (isPasswordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
@@ -108,8 +113,10 @@ fun LoginScreen(navController: NavController) {
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp)
-                .testTag("login.button"),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)), // iOS blue
+                .clearAndSetSemantics {
+                    contentDescription = "login.button"
+                },
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF007AFF)),
             shape = RoundedCornerShape(12.dp)
         ) {
             Text("Login", color = Color.White)
@@ -120,7 +127,9 @@ fun LoginScreen(navController: NavController) {
             Text(
                 loginMessage,
                 color = MaterialTheme.colorScheme.error,
-                modifier = Modifier.testTag("login.message")
+                modifier = Modifier
+                    .testTag("login.message")
+                    .semantics { contentDescription = "login.message" }
             )
         }
     }
