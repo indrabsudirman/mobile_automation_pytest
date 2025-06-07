@@ -44,5 +44,5 @@ See the comparison screenshot below:
 This app is designed with automation in mind. UI elements include accessibility identifiers like:
 
 ```swift
-Text("Home")                .accessibilityIdentifier(AccessibilityIdentifier.Home.home)
+Text("Login Page").accessibilityIdentifier("login.title")
 ```
