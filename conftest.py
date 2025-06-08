@@ -4,6 +4,10 @@ from appium import webdriver
 from appium.options.android import UiAutomator2Options
 from appium.options.ios import XCUITestOptions
 import os
+from dotenv import load_dotenv
+import allure
+
+load_dotenv()
 
 def pytest_addoption(parser):
     parser.addoption(
@@ -14,10 +18,43 @@ def pytest_addoption(parser):
 def platform(request):
     return request.config.getoption("--platform").lower()
 
-@pytest.fixture(scope="session")
-def driver(platform):
+import pytest
+
+@pytest.hookimpl(tryfirst=True)
+def pytest_runtest_logstart(nodeid, location):
+    print(f"\n===== START TEST: {nodeid} =====")
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+
+    if rep.when == "call" and rep.failed:
+        driver = getattr(item, "_driver", None)
+        if driver:
+            print("📸 Test failed, take screenshot ...")
+            screenshot = driver.get_screenshot_as_png()
+            allure.attach(screenshot, name="screenshot", attachment_type=allure.attachment_type.PNG)
+        else:
+            print("⚠️ Driver not found in item._driver.")
+
+    if rep.when == "call":
+        duration = rep.duration
+        status = rep.outcome
+        nodeid = rep.nodeid
+
+        print(f"===== END TEST: {nodeid} =====")
+        print(f"Status: {status.upper()} | Duration: {duration:.2f} seconds\n")
+
+@pytest.fixture(scope="function")
+def driver(platform, request):
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    apk_path = os.path.join(root_dir, "2.2.0.apk")
+    # Use os.path.abspath to get full path
+    apk_path = os.path.abspath(os.path.join(root_dir, "sample_applications", "sample_login_android.apk"))
+    print(f"Using APK path: {apk_path}")
+
+    appium_server = os.getenv("APPIUM_SERVER", "http://localhost:4723")
+
 
     if platform == "android":
         options = UiAutomator2Options()
@@ -27,7 +64,7 @@ def driver(platform):
         options.set_capability("app", apk_path)
         options.set_capability("appWaitActivity", "*.*")
         options.set_capability("autoGrantPermissions", True)
-        appium_server_url = "http://localhost:4723"
+        appium_server_url = appium_server
 
     elif platform == "ios":
         options = XCUITestOptions()
@@ -37,11 +74,12 @@ def driver(platform):
         options.set_capability("platformVersion", "15.5")
         options.set_capability("app", "/path/to/your/app.app")
         options.set_capability("noReset", True)
-        appium_server_url = "http://localhost:4723"
+        appium_server_url = appium_server
 
     else:
-        raise ValueError("Platform harus 'android' atau 'ios'")
+        raise ValueError("Platform must be 'android' or 'ios'")
 
     driver = webdriver.Remote(appium_server_url, options=options)
+    request.node._driver = driver
     yield driver
     driver.quit()

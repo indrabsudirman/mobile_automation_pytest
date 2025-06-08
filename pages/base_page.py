@@ -1,5 +1,6 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from appium.webdriver.common.appiumby import AppiumBy
 
 class BasePage:
     def __init__(self, driver):
@@ -7,7 +8,16 @@ class BasePage:
         self.wait = WebDriverWait(driver, 10) 
     
     def find_element(self, locator):
-        return self.wait.until(EC.presence_of_element_located(locator))
+        if isinstance(locator, tuple):
+            by, value = locator
+            if by == "accessibility id":
+                return self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, value)
+            elif by == "id":
+                return self.driver.find_element(AppiumBy.ID, value)
+            elif by == "xpath":
+                return self.driver.find_element(AppiumBy.XPATH, value)
+        else:
+            raise ValueError("Invalid locator type")
     
     def find_elements(self, locator):
         return self.wait.until(EC.presence_of_all_elements_located(locator))
