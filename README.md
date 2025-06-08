@@ -6,12 +6,14 @@ This repository contains a mobile test automation framework for Android and iOS 
 
 ### Testing Framework
 
-- **pytest** – Test runner
-- **pytest-bdd** – BDD-style test writing (Given/When/Then)
+- **pytest** – Test runner  
+- **pytest-bdd** – BDD-style test writing (Given/When/Then)  
+- **Page Object Model (POM)** – Design pattern for organizing test code by separating page structure and test logic
 
 ### Reporting
 
-- **allure-pytest** – Generates beautiful and detailed test reports
+- **allure-pytest** – Generates beautiful and detailed test reports  
+- **Failure screenshots** – Automatically captured and attached on test failures
 
 ### Automation Tools
 
@@ -41,7 +43,7 @@ These apps are used as test targets to demonstrate and validate the automation f
 
 - Python 3.13.3
 - Node.js & Appium Server
-- Xcode & Android Studio (for building/running iOS and Android apps)
+- Xcode & Android Studio (for building/running iOS and Android apps) [optional] since the .apk and .app already available in this repo
 - Java (for Android tools)
 
 ### Installation
@@ -54,6 +56,8 @@ These apps are used as test targets to demonstrate and validate the automation f
    ```
 
 2. Install `allure` please see [allure](https://allurereport.org/docs/install/) documentation
+   
+   <img width="143" alt="image" src="https://github.com/user-attachments/assets/3274b05a-1c8e-40bc-aae1-b6406c602e40" />
 
 3. Install the dependencies via the `Pipfile` file using
 
@@ -63,11 +67,21 @@ These apps are used as test targets to demonstrate and validate the automation f
    pipenv install
    ```
 
-   ```bash
+    <img width="500" alt="image" src="https://github.com/user-attachments/assets/dcae23da-e0a1-466d-9c23-efe5c1e9a812" />
+
+
+
+     ```bash
    pipenv shell
    ```
 
-If you don't have `pipenv` installed, please install it via `pipx` below (step no 4), skip this step if you already have `pipenv` installed.
+    <img width="962" alt="image" src="https://github.com/user-attachments/assets/a35db7fa-5728-499f-ba45-2aa26669f927" />
+ 
+
+    type `exit` to exit from the virtual environment
+
+
+   If you don't have `pipenv` installed, please install it via `pipx` below (step no 4), skip this step if you already have `pipenv` installed.
 
 4. Install [pipx](https://github.com/pypa/pipx), since I'm using macOS and have brew installed, I can use brew to install pipx:
 
@@ -89,15 +103,27 @@ If you don't have `pipenv` installed, please install it via `pipx` below (step n
 
 6. Make sure you have run `Android Emulator` or real device. Try to run `adb devices` to check if you have any device connected and update the `ANDROID_DEVICE_NAME` in the `.env` file.
 
+   <img width="300" alt="image" src="https://github.com/user-attachments/assets/861a2765-b4a2-4569-8392-643408c656aa" />
+
 7. Try to run the test
 
    ```bash
    pytest -m "loginNegative" -q --disable-warnings --alluredir=reports/allure-results
    ```
 
+    <img width="1607" alt="image" src="https://github.com/user-attachments/assets/3f70a368-2b37-4553-92f8-f260cfffd512" />
+    
+
    The command above will run the test with tag `loginNegative` in Android and will generate the report in `reports/allure-results` directory
 
+   <img width="1680" alt="image" src="https://github.com/user-attachments/assets/c9ca6717-15ef-4a44-832c-026b46cfec07" />
+
+
 8. Finally, To generate the report, please run the command below:
+    
    ```bash
    allure serve reports/allure-results
    ```
+
+    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/41c13fa9-e593-40ec-8d08-d6380e504ee6" />
+
