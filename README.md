@@ -57,17 +57,17 @@ These apps are used as test targets to demonstrate and validate the automation f
 
 3. Install the dependencies via the `Pipfile` file using
 
-- required `Python 3.13.3`
+   - required `Python 3.13.3`
 
-```bash
-pipenv install
-```
+   ```bash
+   pipenv install
+   ```
 
-```bash
-pipenv shell
-```
+   ```bash
+   pipenv shell
+   ```
 
-If you don't have pipenv installed, please install it via pipx below (step no 4), skip this step if you already have pipenv installed
+If you don't have `pipenv` installed, please install it via `pipx` below (step no 4), skip this step if you already have `pipenv` installed.
 
 4. Install [pipx](https://github.com/pypa/pipx), since I'm using macOS and have brew installed, I can use brew to install pipx:
 
