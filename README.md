@@ -108,13 +108,13 @@ These apps are used as test targets to demonstrate and validate the automation f
 7. Try to run the test
 
    ```bash
-   pytest -m "loginNegative" -q --disable-warnings --alluredir=reports/allure-results
+   pytest -m "android and loginNegative" --alluredir=reports/allure-results
    ```
 
-    <img width="1607" alt="image" src="https://github.com/user-attachments/assets/3f70a368-2b37-4553-92f8-f260cfffd512" />
-    
+   <img width="1337" alt="image" src="https://github.com/user-attachments/assets/d152df43-e473-4f07-be8e-10ab62a95f86" />
+ 
 
-   The command above will run the test with tag `loginNegative` in Android and will generate the report in `reports/allure-results` directory
+   The command above will run the test with tag `android and loginNegative` it's mean Android testcases will be execute lastly will generate the report in `reports/allure-results` directory
 
    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/c9ca6717-15ef-4a44-832c-026b46cfec07" />
 
