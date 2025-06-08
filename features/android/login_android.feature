@@ -39,4 +39,4 @@ Scenario: Failed login with empty password
   When I enter username "test"
   And I enter password ""
   And I click login button
-  Then I should see error message "Email dan password harus diisi.fff"
+  Then I should see error message "Email dan password harus diisi."
