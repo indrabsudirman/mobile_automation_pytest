@@ -28,10 +28,10 @@ This repository may also contain simple example apps built with:
 
 - **Swift (iOS)**
   - **SwiftUI**
-  - **Accessibility IDs for robust automation**
+  - **Accessibility IDs for robust automation see [SampleLoginiOS](https://github.com/indrabsudirman/mobile_automation_pytest/tree/main/Sample%20Login%20iOS)\***
 - **Kotlin (Android)**
   - **Jetpack Compose**
-  - **Accessibility IDs for robust automation**
+  - **Accessibility IDs for robust automation see [SampleLoginAndroid](https://github.com/indrabsudirman/mobile_automation_pytest/tree/main/SampleLoginAndroid)**
 
 These apps are used as test targets to demonstrate and validate the automation framework.
 
