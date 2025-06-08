@@ -42,11 +42,7 @@ reports/screenshots/
 
 # Mobile Testing
 *.log
-*.apk
-*.ipa
 
-# Environment variables
-.env
 
 # System files
 .DS_Store
