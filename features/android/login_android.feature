@@ -25,7 +25,7 @@ Feature: Login Functionality - Android
     And I click login button
     Then I should see error message "Email dan password harus diisi."
 
-  @loginNegative
+@loginNegative
 Scenario: Failed login with empty username
   Given I am on the login page
   When I enter username ""
