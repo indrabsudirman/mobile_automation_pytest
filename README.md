@@ -8,7 +8,6 @@ This repository contains a mobile test automation framework for Android and iOS 
 
 - **pytest** – Test runner
 - **pytest-bdd** – BDD-style test writing (Given/When/Then)
-- **pytest-rerunfailures** – Automatically re-run flaky tests
 
 ### Reporting
 
@@ -23,16 +22,16 @@ This repository contains a mobile test automation framework for Android and iOS 
 
 - **python-dotenv** – Load environment variables from `.env` files
 
-### Database
-
-- **psycopg2-binary** – PostgreSQL database interaction
-
 ## 📱 Application Under Test
 
 This repository may also contain simple example apps built with:
 
 - **Swift (iOS)**
+  - **SwiftUI**
+  - **Accessibility IDs for robust automation**
 - **Kotlin (Android)**
+  - **Jetpack Compose**
+  - **Accessibility IDs for robust automation**
 
 These apps are used as test targets to demonstrate and validate the automation framework.
 
@@ -44,7 +43,6 @@ These apps are used as test targets to demonstrate and validate the automation f
 - Node.js & Appium Server
 - Xcode & Android Studio (for building/running iOS and Android apps)
 - Java (for Android tools)
-- PostgreSQL (optional, if database interaction is tested)
 
 ### Installation
 
