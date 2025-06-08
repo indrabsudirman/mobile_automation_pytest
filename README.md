@@ -57,7 +57,7 @@ These apps are used as test targets to demonstrate and validate the automation f
 
 3. Install the dependencies via the `Pipfile` file using
 
-   - required `Python 3.13.3`
+   required `Python 3.13.3`
 
    ```bash
    pipenv install
