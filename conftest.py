@@ -49,14 +49,15 @@ def pytest_runtest_makereport(item, call):
 @pytest.fixture(scope="function")
 def driver(platform, request):
     root_dir = os.path.dirname(os.path.abspath(__file__))
-    # Use os.path.abspath to get full path
-    apk_path = os.path.abspath(os.path.join(root_dir, "sample_applications", "sample_login_android.apk"))
-    print(f"Using APK path: {apk_path}")
+    
 
     appium_server = os.getenv("APPIUM_SERVER", "http://localhost:4723")
 
 
     if platform == "android":
+        # Use os.path.abspath to get full path
+        apk_path = os.path.abspath(os.path.join(root_dir, "sample_applications", "sample_login_android.apk"))
+        print(f"Using APK path: {apk_path}")
         options = UiAutomator2Options()
         options.set_capability("platformName", "Android")
         options.set_capability("automationName", "UiAutomator2")
@@ -67,13 +68,15 @@ def driver(platform, request):
         appium_server_url = appium_server
 
     elif platform == "ios":
+        app_path = os.path.abspath(os.path.join(root_dir, "sample_applications", "sample_login_ios.app"))
+        print(f"Using .app path: {app_path}")
         options = XCUITestOptions()
         options.set_capability("platformName", "iOS")
         options.set_capability("automationName", "XCUITest")
-        options.set_capability("deviceName", "iPhone Simulator")
-        options.set_capability("platformVersion", "15.5")
-        options.set_capability("app", "/path/to/your/app.app")
-        options.set_capability("noReset", True)
+        options.set_capability("deviceName", "iPhone 16 Pro")
+        options.set_capability("platformVersion", "18.0")
+        options.set_capability("app", app_path)
+        options.set_capability("autoAcceptAlerts", True)
         appium_server_url = appium_server
 
     else:
