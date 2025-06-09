@@ -35,7 +35,7 @@ This repository may also contain simple example apps built with:
   - **Jetpack Compose**
   - **Accessibility IDs for robust automation see [SampleLoginAndroid](https://github.com/indrabsudirman/mobile_automation_pytest/tree/main/SampleLoginAndroid)**
 
-These apps are used as test targets to demonstrate and validate the automation framework.
+> These apps are used as test targets to demonstrate and validate the automation framework. You can see the apps in the `sample_applications` directory. For the iOS app (.app) you need to extract it first
 
 ## 🚀 Getting Started
 
@@ -118,8 +118,16 @@ These apps are used as test targets to demonstrate and validate the automation f
 
    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/c9ca6717-15ef-4a44-832c-026b46cfec07" />
 
+   for the ios you need to pass the `platform`
+   ```bash
+   pytest --platform=ios -m "ios and loginNegative" --alluredir=reports/allure-results
+   ```
 
-8. Finally, To generate the report, please run the command below:
+   <img width="1680" alt="image" src="https://github.com/user-attachments/assets/7744cf76-5a33-4bd0-9428-52d5effede43" />
+
+
+
+9. Finally, To generate the report, please run the command below:
     
    ```bash
    allure serve reports/allure-results
