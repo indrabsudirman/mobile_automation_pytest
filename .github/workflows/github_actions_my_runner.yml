@@ -1,0 +1,82 @@
+name: Run Mobile Automation Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Select Platform'
+        required: true
+        default: 'android'
+        type: choice
+        options:
+          - android
+          - ios
+
+jobs:
+  run-tests:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies with Pipenv
+        run: pipenv install --dev
+
+      # Step 3: Android Emulator
+      - name: Start Android Emulator
+        if: ${{ github.event.inputs.platform == 'android' }}
+        run: |
+          echo "🔄 Starting Android Emulator..."
+          nohup emulator -avd Pixel_6_API_34 > emulator.log 2>&1 &
+          adb wait-for-device
+          adb shell input keyevent 82
+          echo "✅ Android Emulator is ready."
+
+      # Step 4: iOS Simulator
+      - name: Setup iOS Simulator & Install .app
+        if: ${{ github.event.inputs.platform == 'ios' }}
+        run: |
+          echo "📦 Unzipping .app to ~/sampe_applications..."
+          mkdir -p ~/sampe_applications
+          unzip MyApp.zip -d ~/sampe_applications
+
+          echo "📲 Booting iPhone 16 Pro Simulator..."
+          xcrun simctl boot "iPhone 16 Pro"
+          xcrun simctl bootstatus "iPhone 16 Pro" -b
+
+          echo "📥 Installing app to simulator..."
+          xcrun simctl install "iPhone 16 Pro" ~/sampe_applications/MyApp.app
+
+      # Step 5: Start Appium and Run Tests
+      - name: Start Appium Server
+        run: |
+          echo "🚀 Starting Appium Server..."
+          nohup appium > appium.log 2>&1 &
+          sleep 5
+
+      - name: Run Pytest (Android)
+        if: ${{ github.event.inputs.platform == 'android' }}
+        run: pipenv run pytest -m "android and loginNegative" --alluredir=reports/allure-results
+
+      - name: Run Pytest (iOS)
+        if: ${{ github.event.inputs.platform == 'ios' }}
+        run: pipenv run pytest --platform=ios -m "ios and loginNegative" --alluredir=reports/allure-results
+
+      # Step 6: Generate Allure Report (local only)
+      - name: Generate Allure Report
+        run: |
+          echo "📊 Generating Allure Report..."
+          allure generate reports/allure-results --clean -o reports/allure-report
+
+      # Step 7: Upload Allure Report as Artifact
+      - name: Upload Allure Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report-${{ github.event.inputs.platform }}
+          path: reports/allure-report
