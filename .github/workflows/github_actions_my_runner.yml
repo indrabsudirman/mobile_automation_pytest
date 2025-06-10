@@ -20,15 +20,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
       - name: Install dependencies with Pipenv
         run: pipenv install --dev
 
-      # Step 3: Android Emulator
+      # Android Emulator
       - name: Start Android Emulator
         if: ${{ github.event.inputs.platform == 'android' }}
         run: |
@@ -38,7 +33,7 @@ jobs:
           adb shell input keyevent 82
           echo "✅ Android Emulator is ready."
 
-      # Step 4: iOS Simulator
+      # iOS Simulator
       - name: Setup iOS Simulator & Install .app
         if: ${{ github.event.inputs.platform == 'ios' }}
         run: |
@@ -50,7 +45,7 @@ jobs:
           xcrun simctl boot "iPhone 16 Pro"
           xcrun simctl bootstatus "iPhone 16 Pro" -b
 
-      # Step 5: Start Appium and Run Tests
+      # Start Appium
       - name: Start Appium Server
         run: |
           echo "🚀 Starting Appium Server..."
@@ -65,15 +60,21 @@ jobs:
         if: ${{ github.event.inputs.platform == 'ios' }}
         run: pipenv run pytest --platform=ios -m "ios and loginNegative" --alluredir=reports/allure-results
 
-      # Step 6: Generate Allure Report (local only)
-      - name: Generate Allure Report
+      # Generate Allure HTML
+      - name: Generate Allure Report (HTML)
         run: |
-          echo "📊 Generating Allure Report..."
+          echo "📊 Generating Allure HTML Report..."
           allure generate reports/allure-results --clean -o reports/allure-report
 
-      # Step 7: Upload Allure Report as Artifact
-      - name: Upload Allure Report as Artifact
+      # Zip HTML report
+      - name: Compress Allure HTML Report
+        run: |
+          echo "🗜️ Compressing Allure HTML Report..."
+          zip -r reports/allure-report.zip reports/allure-report
+
+      # Upload Allure HTML as Artifact
+      - name: Upload Allure Report (ZIP)
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report-${{ github.event.inputs.platform }}
-          path: reports/allure-report
+          name: allure-report-${{ github.event.inputs.platform }}-html
+          path: reports/allure-report.zip
