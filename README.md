@@ -130,3 +130,6 @@ This repository may also contain simple example apps built with:
     <img width="1680" alt="image" src="https://github.com/user-attachments/assets/41c13fa9-e593-40ec-8d08-d6380e504ee6" />
 
 9. I intergrate this repo with GitHub Actions, you can see the report in the [Actions](repo with GitHub Actions, you can see the report in the [Actions](https://github.com/indrabsudirman/mobile_automation_pytest/actions) tab
+
+    <img width="1680" alt="image" src="https://github.com/user-attachments/assets/29e28d4f-22d6-4e3d-91e1-c703d4a0d759" />
+
