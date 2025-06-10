@@ -33,7 +33,7 @@ jobs:
         if: ${{ github.event.inputs.platform == 'android' }}
         run: |
           echo "🔄 Starting Android Emulator..."
-          nohup emulator -avd Pixel_6_API_34 > emulator.log 2>&1 &
+          nohup emulator -avd Pixel_8_Pro_API_36 > emulator.log 2>&1 &
           adb wait-for-device
           adb shell input keyevent 82
           echo "✅ Android Emulator is ready."
@@ -44,14 +44,11 @@ jobs:
         run: |
           echo "📦 Unzipping .app to ~/sampe_applications..."
           mkdir -p ~/sampe_applications
-          unzip MyApp.zip -d ~/sampe_applications
+          unzip sample_login_ios.zip -d ~/sampe_applications
 
           echo "📲 Booting iPhone 16 Pro Simulator..."
           xcrun simctl boot "iPhone 16 Pro"
           xcrun simctl bootstatus "iPhone 16 Pro" -b
-
-          echo "📥 Installing app to simulator..."
-          xcrun simctl install "iPhone 16 Pro" ~/sampe_applications/MyApp.app
 
       # Step 5: Start Appium and Run Tests
       - name: Start Appium Server
