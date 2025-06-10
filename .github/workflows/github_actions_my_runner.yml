@@ -72,9 +72,13 @@ jobs:
           echo "🗜️ Compressing Allure HTML Report..."
           zip -r reports/allure-report.zip reports/allure-report
 
+      # Set timestamp variable
+      - name: Set TIMESTAMP
+        run: echo "TIMESTAMP=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
+
       # Upload Allure HTML as Artifact
       - name: Upload Allure Report (ZIP)
         uses: actions/upload-artifact@v4
         with:
-          name: allure-report-${{ github.event.inputs.platform }}-html
+          name: allure-report-${{ github.event.inputs.platform }}-${{ env.TIMESTAMP }}
           path: reports/allure-report.zip
