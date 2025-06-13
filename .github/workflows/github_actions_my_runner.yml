@@ -41,6 +41,8 @@ jobs:
         if: ${{ github.event.inputs.platform == 'ios' }}
         run: |
           echo "📦 Unzipping .app ..."
+          pwd
+          ls -la
           cd sampe_applications
           unzip sample_login_ios.zip
 
