@@ -77,6 +77,13 @@ jobs:
           echo "🗜️ Compressing Allure HTML Report..."
           zip -r reports/allure-report.zip reports/allure-report
 
+      # Shutdown iOS Simulator
+      - name: Shutdown iOS Simulator
+        if: ${{ github.event.inputs.platform == 'ios' }}
+        run: |
+          echo "🛑 Shutting down iPhone 16 Pro Simulator..."
+          xcrun simctl shutdown "iPhone 16 Pro"
+
       # Set timestamp variable
       - name: Set TIMESTAMP
         run: echo "TIMESTAMP=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_ENV
