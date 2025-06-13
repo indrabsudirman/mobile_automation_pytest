@@ -43,7 +43,7 @@ jobs:
           echo "📦 Unzipping .app ..."
           pwd
           ls -la
-          cd sampe_applications
+          cd sample_applications
           unzip sample_login_ios.zip
 
           echo "📲 Booting iPhone 16 Pro Simulator..."
