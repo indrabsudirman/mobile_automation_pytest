@@ -33,13 +33,16 @@ jobs:
           adb shell input keyevent 82
           echo "✅ Android Emulator is ready."
 
+      - name: Show Current Working Directory
+        run: pwd
+
       # iOS Simulator
       - name: Setup iOS Simulator & Install .app
         if: ${{ github.event.inputs.platform == 'ios' }}
         run: |
-          echo "📦 Unzipping .app to ~/sampe_applications..."
-          mkdir -p ~/sampe_applications
-          unzip sample_login_ios.zip -d ~/sampe_applications
+          echo "📦 Unzipping .app ..."
+          cd sampe_applications
+          unzip sample_login_ios.zip
 
           echo "📲 Booting iPhone 16 Pro Simulator..."
           xcrun simctl boot "iPhone 16 Pro"
